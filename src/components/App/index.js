@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import List from "../List";
 import Input from "../Input";
@@ -8,6 +8,10 @@ import "./App.css";
 function App() {
   console.log("App rerender");
   const [toDos, setToDos] = useState(["test"]);
+
+  useEffect(() => {
+    document.title = `${toDos.length} things to do...`;
+  }, [toDos]);
 
   function handleDelete(i) {
     console.log("%chandle delete", "color:lightblue");
@@ -21,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>My list...</h1>
+      <h1>To do List</h1>
       <Input onData={addToDo} />
       <List toDos={toDos} handleDelete={handleDelete} />
     </div>
